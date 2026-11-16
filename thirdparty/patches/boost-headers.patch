@@ -7,8 +7,8 @@ diff --git BUILD.boost BUILD.boost
          ":asio",
 -        "@openssl//:ssl",
 +        # s390x: BoringSSL does not support big-endian architectures; use
-+        # the main-repository libssl workspace bind (OpenSSL) instead.
-+        "@//:libssl",
++        # the main repository's libssl workspace bind (OpenSSL) instead.
++        "@io_ray//external:libssl",
      ],
  )
 

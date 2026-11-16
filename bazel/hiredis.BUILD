@@ -59,11 +59,11 @@ cc_library(
     deps = [
         ":_hiredis",
         # s390x: BoringSSL does not support big-endian architectures. Route
-        # hiredis through the main-repository libssl/libcrypto workspace binds
-        # (see WORKSPACE), which point at OpenSSL on s390x and BoringSSL
-        # elsewhere... see WORKSPACE for the current binding.
-        "@//:libssl",
-        "@//:libcrypto"
+        # hiredis through the main repository's (io_ray) libssl/libcrypto
+        # workspace binds, which point at OpenSSL on s390x. The binds live in
+        # the special //external package created by bind() in the WORKSPACE.
+        "@io_ray//external:libssl",
+        "@io_ray//external:libcrypto"
     ],
     visibility = ["//visibility:public"],
 )
