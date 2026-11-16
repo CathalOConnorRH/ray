@@ -77,6 +77,18 @@ bind(
     actual = "@openssl//:openssl",
 )
 
+# s390x (IBM Z): rules_perl only ships hermetic Perl distributions for
+# linux x86_64/arm64, darwin and windows. Expose the host system Perl as a
+# repository and register a toolchain for it (defined in //bazel), which the
+# OpenSSL build needs (its Configure script is driven by Perl).
+new_local_repository(
+    name = "perl_s390x_system",
+    path = "/usr",
+    build_file = "@io_ray//bazel:perl_system.BUILD",
+)
+
+register_toolchains("//bazel:linux_s390x_perl_toolchain")
+
 load("@bazel_skylib//lib:versions.bzl", "versions")
 
 # Floor only: .bazelversion is the exact pin, and bazelisk applies it before this

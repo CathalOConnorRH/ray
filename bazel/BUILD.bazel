@@ -52,6 +52,27 @@ config_setting(
     ],
 )
 
+# s390x (IBM Z): rules_perl has no hermetic Perl distribution for s390x, so
+# register a toolchain backed by the host system Perl, exposed through the
+# @perl_s390x_system repository declared in the WORKSPACE.
+load("@rules_perl//perl:toolchain.bzl", "perl_toolchain")
+
+perl_toolchain(
+    name = "linux_s390x_perl_toolchain_impl",
+    runtime = ["@perl_s390x_system//:runtime"],
+)
+
+toolchain(
+    name = "linux_s390x_perl_toolchain",
+    exec_compatible_with = [
+        "@platforms//os:linux",
+        "@platforms//cpu:s390x",
+    ],
+    toolchain = ":linux_s390x_perl_toolchain_impl",
+    toolchain_type = "@rules_perl//:toolchain_type",
+    visibility = ["//visibility:public"],
+)
+
 config_setting(
     name = "osx_x86_64_config",
     constraint_values = [
