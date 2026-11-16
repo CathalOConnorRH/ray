@@ -67,12 +67,12 @@ grpc_extra_deps()
 # bind in the WORKSPACE overrides an earlier one, so these take precedence.
 # gRPC 1.58 fully supports OpenSSL 1.1.1 (its TSI layer has dedicated OpenSSL
 # code paths, e.g. src/core/tsi/ssl/session_cache/ssl_session_openssl.cc).
-native.bind(
+bind(
     name = "libssl",
     actual = "@openssl//:openssl",
 )
 
-native.bind(
+bind(
     name = "libcrypto",
     actual = "@openssl//:openssl",
 )
