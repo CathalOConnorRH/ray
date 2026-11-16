@@ -1,12 +1,14 @@
 diff --git BUILD.boost BUILD.boost
 --- a/BUILD.boost
 +++ b/BUILD.boost
-@@ -457,7 +457,7 @@ cc_library(
+@@ -457,7 +457,9 @@ cc_library(
      visibility = ["//visibility:public"],
      deps = [
          ":asio",
 -        "@openssl//:ssl",
-+        "@boringssl//:ssl",
++        # s390x: BoringSSL does not support big-endian architectures; use
++        # the main-repository libssl workspace bind (OpenSSL) instead.
++        "@//:libssl",
      ],
  )
 

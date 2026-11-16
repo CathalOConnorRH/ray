@@ -89,6 +89,17 @@ new_local_repository(
 
 register_toolchains("//bazel:linux_s390x_perl_toolchain")
 
+# The OpenSSL build file from rules_foreign_cc's examples references @nasm in
+# its Windows-only (MSVC) variant. Ray never declared this repository because
+# nothing loaded the @openssl package before the s390x libssl/libcrypto rebind
+# made that happen. The label must resolve on every platform, but it is only
+# ever actually built on Windows.
+http_archive(
+    name = "nasm",
+    build_file = "@rules_foreign_cc_thirdparty//openssl:BUILD.nasm.bazel",
+    urls = ["https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/win64/nasm-2.16.01-win64.zip"],
+)
+
 load("@bazel_skylib//lib:versions.bzl", "versions")
 
 # Floor only: .bazelversion is the exact pin, and bazelisk applies it before this
