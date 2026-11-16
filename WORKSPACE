@@ -59,6 +59,24 @@ load("@com_github_grpc_grpc//bazel:grpc_extra_deps.bzl", "grpc_extra_deps")
 
 grpc_extra_deps()
 
+# s390x (IBM Z) support: BoringSSL does not support big-endian architectures
+# (see its src/include/openssl/target.h), so it cannot build or run on s390x.
+# gRPC resolves its TLS layer through the "libssl"/"libcrypto" workspace binds
+# that grpc_deps() points at @boringssl. Rebind them to the OpenSSL 1.1.1f
+# build declared in bazel/ray_deps_setup.bzl, which supports s390x. A later
+# bind in the WORKSPACE overrides an earlier one, so these take precedence.
+# gRPC 1.58 fully supports OpenSSL 1.1.1 (its TSI layer has dedicated OpenSSL
+# code paths, e.g. src/core/tsi/ssl/session_cache/ssl_session_openssl.cc).
+native.bind(
+    name = "libssl",
+    actual = "@openssl//:openssl",
+)
+
+native.bind(
+    name = "libcrypto",
+    actual = "@openssl//:openssl",
+)
+
 load("@bazel_skylib//lib:versions.bzl", "versions")
 
 # Floor only: .bazelversion is the exact pin, and bazelisk applies it before this
