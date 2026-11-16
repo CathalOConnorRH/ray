@@ -24,6 +24,9 @@ def get_system_info():
     elif architecture == "aarch64":
         # In the Prometheus filename, it's called arm64
         architecture = "arm64"
+    elif architecture == "s390x":
+        # In the Prometheus filename, it's called s390x
+        pass
     return os_type, architecture
 
 

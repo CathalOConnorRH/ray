@@ -184,6 +184,9 @@ install_node() {
     if [[ "$(uname -m)" == "x86_64" ]]; then
       NODE_URL="https://nodejs.org/dist/v${NODE_VERSION_FULL}/node-v${NODE_VERSION_FULL}-linux-x64.tar.xz"
       NODE_SHA256="05c08a107c50572ab39ce9e8663a2a2d696b5d262d5bd6f98d84b997ce932d9a"
+    elif [[ "$(uname -m)" == "s390x" ]]; then
+      NODE_URL="https://nodejs.org/dist/v${NODE_VERSION_FULL}/node-v${NODE_VERSION_FULL}-linux-s390x.tar.xz"
+      NODE_SHA256="a241aa16cbf5485ebc54955bec42a81334278808174fcfd4199bcc3256f77eb0"
     else # aarch64
       NODE_URL="https://nodejs.org/dist/v${NODE_VERSION_FULL}/node-v${NODE_VERSION_FULL}-linux-arm64.tar.xz"
       NODE_SHA256="f06642bfcf0b8cc50231624629bec58b183954641b638e38ed6f94cd39e8a6ef"

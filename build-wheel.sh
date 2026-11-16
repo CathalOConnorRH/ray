@@ -20,6 +20,7 @@ case "$(uname -s)-$(uname -m)" in
     Darwin-arm64)  WHEEL_PLATFORM="macosx_12_0_arm64" ;;
     Linux-x86_64)  WHEEL_PLATFORM="manylinux2014_x86_64" ;;
     Linux-aarch64) WHEEL_PLATFORM="manylinux2014_aarch64" ;;
+    Linux-s390x)   WHEEL_PLATFORM="manylinux2014_s390x" ;;
     *) echo "Error: Unsupported platform: $(uname -s)-$(uname -m)" >&2; exit 1 ;;
 esac
 

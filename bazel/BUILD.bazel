@@ -45,6 +45,14 @@ config_setting(
 )
 
 config_setting(
+    name = "linux_s390x_config",
+    constraint_values = [
+        "@platforms//os:linux",
+        "@platforms//cpu:s390x",
+    ],
+)
+
+config_setting(
     name = "osx_x86_64_config",
     constraint_values = [
         "@platforms//os:osx",

@@ -248,6 +248,19 @@ http_archive(
     urls = ["https://github.com/ray-project/redis/releases/download/7.2.3/redis-linux-arm64.tar.gz"],
 )
 
+# s390x (IBM Z) build of redis 7.2.3.
+# FIXME(s390x): build redis 7.2.3 from the ray-project/redis sources on an
+# IBM Z host, upload redis-linux-s390x.tar.gz (containing redis-server and
+# redis-cli at the archive root, matching the arm64 layout) to a GitHub
+# release on your fork, and replace the placeholder sha256 below with the
+# real checksum (`shasum -a 256 redis-linux-s390x.tar.gz`).
+http_archive(
+    name = "redis_linux_s390x",
+    build_file_content = """exports_files(["redis-server", "redis-cli"])""",
+    sha256 = "0000000000000000000000000000000000000000000000000000000000000000",
+    urls = ["https://github.com/CathalOConnorRH/ray/releases/download/redis-7.2.3/redis-linux-s390x.tar.gz"],
+)
+
 http_archive(
     name = "redis_osx_arm64",
     build_file_content = """exports_files(["redis-server", "redis-cli"])""",
