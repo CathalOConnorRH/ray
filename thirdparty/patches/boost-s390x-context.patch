@@ -1,0 +1,29 @@
+diff --git BUILD.boost BUILD.boost
+--- a/BUILD.boost
++++ b/BUILD.boost
+@@ -28,6 +28,14 @@ config_setting(
+     ],
+ )
+ 
++config_setting(
++    name = "linux_s390x",
++    constraint_values = [
++        "@platforms//os:linux",
++        "@platforms//cpu:s390x",
++    ],
++)
++
+ config_setting(
+     name = "linux_aarch64",
+     constraint_values = [
+@@ -112,5 +120,10 @@ BOOST_CTX_ASM_SOURCES = selects.with_or({
+         "libs/context/src/asm/ontop_ppc64_sysv_elf_gas.S",
+     ],
++    ":linux_s390x": [
++        "libs/context/src/asm/jump_s390x_sysv_elf_gas.S",
++        "libs/context/src/asm/make_s390x_sysv_elf_gas.S",
++        "libs/context/src/asm/ontop_s390x_sysv_elf_gas.S",
++    ],
+     ":linux_x86_64": [
+         "libs/context/src/asm/jump_x86_64_sysv_elf_gas.S",
+         "libs/context/src/asm/make_x86_64_sysv_elf_gas.S",

@@ -242,6 +242,7 @@ def ray_deps_setup():
         sha256 = "490d11425393eed068966a4990ead1ff07c658f823fd982fddac67006ccc44ab",
         patches = [
             "//thirdparty/patches:boost-headers.patch",
+            "//thirdparty/patches:boost-s390x-context.patch",
         ],
         patch_args = ["-p1"],
     )
